@@ -1,7 +1,7 @@
 ##### Sailor Clothing
 
-##### Hosted @ Varcel
-https://sailor-clothing.varcel.app/
+##### Hosted @ Vercel
+https://sailor-clothing.vercel.app/
 
 ##### Installation
 
