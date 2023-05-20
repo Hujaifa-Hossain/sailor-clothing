@@ -53,7 +53,7 @@ const Categories = () => {
 			>
 				{images?.map((img, i) => (
 					<SwiperSlide key={i}>
-						<Image src={img} className='h-60 w-full' alt='category' />
+						<Image src={img} className='w-full' alt='category' />
 					</SwiperSlide>
 				))}
 

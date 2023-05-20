@@ -109,7 +109,7 @@ const Arrivals = () => {
 									<SwiperSlide key={i}>
 										<Image
 											src={s?.src}
-											className='h-60 w-full'
+											className='w-full'
 											alt='arrivals'
 										/>
 									</SwiperSlide>
@@ -160,7 +160,7 @@ const Arrivals = () => {
 									<SwiperSlide key={i}>
 										<Image
 											src={s?.src}
-											className='h-60 w-full'
+											className='w-full'
 											alt='arrivals'
 										/>
 									</SwiperSlide>
@@ -211,7 +211,7 @@ const Arrivals = () => {
 									<SwiperSlide key={i}>
 										<Image
 											src={s?.src}
-											className='h-60 w-full'
+											className='w-full'
 											alt='arrivals'
 										/>
 									</SwiperSlide>
@@ -262,7 +262,7 @@ const Arrivals = () => {
 									<SwiperSlide key={i}>
 										<Image
 											src={s?.src}
-											className='h-60 w-full'
+											className='w-full'
 											alt='arrivals'
 										/>
 									</SwiperSlide>
@@ -312,7 +312,7 @@ const Arrivals = () => {
 									<SwiperSlide key={i}>
 										<Image
 											src={s?.src}
-											className='h-60 w-full'
+											className='w-full'
 											alt='arrivals'
 										/>
 									</SwiperSlide>
