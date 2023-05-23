@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { links } from './links';
-import logo from '../assets/logo.jpeg';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
 	const [open, setOpen] = useState(false);
@@ -48,7 +48,7 @@ const Navbar = () => {
 
 				<div className='container m-auto px-4 xl:flex justify-between items-center py-1 hidden border-b border-gray-100'>
 					<Link href='/'>
-						<Image src={logo} height={70} />
+						<Image src={logo} height={70} alt='logo' />
 					</Link>
 					<form className='flex align-middle'>
 						<input
@@ -87,10 +87,11 @@ const Navbar = () => {
 				{/* MEGA MENU */}
 				<div className='container m-auto flex items-center font-medium justify-between'>
 					<div
-						className='z-50 px-4 mt-1 text-3xl md:hidden cursor-pointer'
+						className='px-4 mt-1 text-3xl md:hidden cursor-pointer'
 						onClick={() => setOpen(!open)}
 					>
-						<ion-icon name={`${open ? 'close' : 'menu'}`}></ion-icon>
+						{/* <ion-icon name={`${open ? 'close' : 'menu'}`}></ion-icon> */}
+						<ion-icon name='menu'></ion-icon>
 					</div>
 					<ul className='md:flex hidden uppercase items-center gap-8'>
 						{/* desktop */}
@@ -173,19 +174,20 @@ const Navbar = () => {
 							</div>
 						))}
 					</ul>
+
 					<ul
 						className={`
-        md:hidden bg-white fixed w-full top-0 overflow-y-auto py-16 pl-4
-        duration-500 h-screen ${open ? 'left-0' : 'left-[-100%]'}
+        md:hidden bg-white fixed top-0 overflow-y-auto p-2
+        duration-500 h-screen ${open ? 'left-0 w-[70%]' : 'left-[-100%]'}
         `}
 					>
 						{/* Mobile */}
-
 						{links.map((link) => (
 							<div>
-								<div className='px-3 text-left md:cursor-pointer group'>
-									<h1
-										className='py-7 flex justify-between items-center md:pr-0 pr-5 group'
+								<div className='px-2 group'>
+									{/* Category tom heading like men, women */}
+									<div
+										className='py-1 flex justify-between items-center group border-b'
 										onClick={() => {
 											heading !== link.name
 												? setHeading(link.name)
@@ -193,8 +195,8 @@ const Navbar = () => {
 											setSubHeading('');
 										}}
 									>
-										{link.name}
-										<span className='text-xl md:hidden inline'>
+										<p>{link.name}</p>
+										<p className='md:hidden inline'>
 											<ion-icon
 												name={`${
 													heading === link.name
@@ -202,86 +204,57 @@ const Navbar = () => {
 														: 'add-outline'
 												}`}
 											></ion-icon>
-										</span>
-										<span className='text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:-mt-2'>
-											<ion-icon name='chevron-down'></ion-icon>
-										</span>
-									</h1>
-									{link.submenu && (
-										<div>
-											<div className='absolute top-20 hidden group-hover:md:block hover:md:block'>
-												<div className='py-3'>
-													<div
-														className='w-4 h-4 left-3 absolute 
-                    mt-1 bg-white rotate-45'
-													></div>
-												</div>
-												<div className='bg-white p-5 grid grid-cols-3 gap-10'>
-													{link.sublinks?.map((mysublinks) => (
-														<div>
-															<h1 className='text-lg font-semibold'>
-																{mysublinks.Head}
-															</h1>
-															{mysublinks.sublink.map((slink) => (
-																<li className='text-sm text-gray-600 my-2.5'>
-																	<Link
-																		href={slink.link}
-																		className='hover:text-primary'
-																	>
-																		{slink.name}
-																	</Link>
-																</li>
-															))}
-														</div>
-													))}
-												</div>
-											</div>
-										</div>
-									)}
+										</p>
+									</div>
+									{/* Category top heading like men, women */}
 								</div>
+
 								{/* Mobile menus */}
 								<div
 									className={`
-            ${heading === link.name ? 'md:hidden' : 'hidden'}
-          `}
+            				${heading === link.name ? 'md:hidden' : 'hidden'}
+          					`}
 								>
 									{/* sublinks */}
 									{link.sublinks?.map((slinks) => (
-										<div>
-											<div>
-												<h1
-													onClick={() =>
-														subHeading !== slinks.Head
-															? setSubHeading(slinks.Head)
-															: setSubHeading('')
-													}
-													className='py-4 pl-7 font-semibold md:pr-0 pr-5 flex justify-between items-center'
-												>
-													{slinks.Head}
+										<>
+											{/* top heading like Topwear */}
+											<div
+												onClick={() =>
+													subHeading !== slinks.Head
+														? setSubHeading(slinks.Head)
+														: setSubHeading('')
+												}
+												className='py-1 px-2 flex justify-between items-center group border-b'
+											>
+												<p>{slinks.Head}</p>
 
-													<span className='text-xl md:mt-1 md:ml-2 inline'>
-														<ion-icon
-															name={`${
-																subHeading === slinks.Head
-																	? 'remove-outline'
-																	: 'add-outline'
-															}`}
-														></ion-icon>
-													</span>
-												</h1>
-												<div
-													className={`${
-														subHeading === slinks.Head ? 'md:hidden' : 'hidden'
-													}`}
-												>
-													{slinks.sublink.map((slink) => (
-														<li className='py-3 pl-14'>
-															<Link href={slink.link}>{slink.name}</Link>
-														</li>
-													))}
-												</div>
+												<p className='md:hidden inline'>
+													<ion-icon
+														name={`${
+															subHeading === slinks.Head
+																? 'remove-outline'
+																: 'add-outline'
+														}`}
+													></ion-icon>
+												</p>
 											</div>
-										</div>
+											{/* top heading like Topwear */}
+
+											<div
+												className={`${
+													subHeading === slinks.Head ? 'md:hidden' : 'hidden'
+												}`}
+											>
+												{slinks.sublink.map((slink) => (
+													<div>
+														<Link className='py-1 pl-3' href={slink.link}>
+															{slink.name}
+														</Link>
+													</div>
+												))}
+											</div>
+										</>
 									))}
 								</div>
 							</div>
@@ -292,15 +265,26 @@ const Navbar = () => {
 						<Image src={logo} height={70} />
 					</Link>
 					<div
-						className='md:hidden cursor-pointer group active:border active:border-black px-3 py-2 rounded-sm'
+						className='md:hidden cursor-pointer group px-3 py-2 rounded-sm'
 						onClick={() => setSearch(!search)}
 					>
 						<ion-icon name='search'></ion-icon>
 
-						{search && <form className="absolute top-14 bg-white w-full left-0 p-4">
-							<input type="text"  className='w-full py-2 px-3 my-2 bg-gray-100' placeholder='Search'/>
-							<button type='submit' className='text-white bg-black text-center w-full py-3'>Search</button>
-						</form>}
+						{search && (
+							<form className='top-14 bg-white w-full left-0 p-4'>
+								<input
+									type='text'
+									className='w-full py-2 px-3 my-2 bg-gray-100'
+									placeholder='Search'
+								/>
+								<button
+									type='submit'
+									className='text-white bg-black text-center w-full py-3'
+								>
+									Search
+								</button>
+							</form>
+						)}
 					</div>
 				</div>
 			</div>
