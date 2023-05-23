@@ -184,16 +184,17 @@ const Navbar = () => {
 						{/* Mobile */}
 						{links.map((link) => (
 							<div>
-								<div className='px-2 group'>
+								<div className='group my-[2px]'>
 									{/* Category tom heading like men, women */}
 									<div
-										className='py-1 flex justify-between items-center group border-b'
 										onClick={() => {
 											heading !== link.name
-												? setHeading(link.name)
-												: setHeading('');
+											? setHeading(link.name)
+											: setHeading('');
 											setSubHeading('');
 										}}
+										// className='py-1 flex justify-between items-center group border-b'
+										className={`py-1 px-2 flex justify-between items-center group border-b w-full ${heading === link.name ? 'bg-gray-900 text-white' : ''}`}
 									>
 										<p>{link.name}</p>
 										<p className='md:hidden inline'>
@@ -225,7 +226,8 @@ const Navbar = () => {
 														? setSubHeading(slinks.Head)
 														: setSubHeading('')
 												}
-												className='py-1 px-2 flex justify-between items-center group border-b'
+												// className='py-1 px-2 flex justify-between items-center group border-b'
+												className={`py-1 px-2 flex justify-between items-center group border-b ${subHeading === slinks.Head ? 'bg-gray-900 text-white' : ''}`}
 											>
 												<p>{slinks.Head}</p>
 
