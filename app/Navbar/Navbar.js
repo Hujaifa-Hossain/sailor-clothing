@@ -10,22 +10,37 @@ const Navbar = () => {
 	const [search, setSearch] = useState(false);
 	const [heading, setHeading] = useState('');
 	const [subHeading, setSubHeading] = useState('');
-	
-	const refOne = useRef(null);
-	const refTwo = useRef(null);
 
-	useEffect(()=> {
-		document.addEventListener('click', handleClickOutSide, true)
+	const menuRef = useRef();
+	const searchRef = useRef();
+
+	useEffect(() => {
+		let handleClickOutSide = (e) => {
+			if (!menuRef.current.contains(e.target)) {
+				setOpen(false);
+			} else if (!searchRef.current.contains(e.target)) {
+				setSearch(false);
+			}
+		};
+		document.addEventListener('mousedown', handleClickOutSide);
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutSide);
+		};
 	}, []);
 
-	const handleClickOutSide = (e) => {
-		if(!refOne.current.contains(e.target) || !refTwo.current.contains(e.target)) {
-			setOpen(false);
-			setSearch(false)
-		} else {
-			setOpen(true)
-		}
-	}
+	// useEffect(() => {
+	// 	let handleClickOutSide = (e) => {
+	// 		if (!searchRef.current.contains(e.target)) {
+	// 			setSearch(false);
+	// 		}
+	// 	};
+	// 	document.addEventListener('mousedown', handleClickOutSide);
+
+	// 	return () => {
+	// 		document.removeEventListener('mousedown', handleClickOutSide);
+	// 	};
+	// }, []);
 
 	return (
 		<nav>
@@ -102,12 +117,14 @@ const Navbar = () => {
 				</div>
 
 				{/* MEGA MENU */}
-				<div className='container m-auto flex items-center font-medium justify-between'>
+				<div
+					className='container m-auto flex items-center font-medium justify-between'
+					ref={menuRef}
+				>
 					<div
 						className='px-4 mt-1 text-3xl md:hidden cursor-pointer'
 						onClick={() => setOpen(!open)}
 					>
-						{/* <ion-icon name={`${open ? 'close' : 'menu'}`}></ion-icon> */}
 						<ion-icon name='menu'></ion-icon>
 					</div>
 					<ul className='md:flex hidden uppercase items-center gap-8'>
@@ -137,7 +154,10 @@ const Navbar = () => {
 																{mysublinks.Head}
 															</h1>
 															{mysublinks.sublink.map((slink, i) => (
-																<li className='text-sm text-gray-600 my-2.5' key={i}>
+																<li
+																	className='text-sm text-gray-600 my-2.5'
+																	key={i}
+																>
 																	<Link
 																		href={slink.link}
 																		className='hover:text-primary'
@@ -195,9 +215,11 @@ const Navbar = () => {
 					<div
 						className={`
         md:hidden bg-white fixed top-0 overflow-y-auto p-2
-        duration-500 h-screen  ${open ? 'left-0 w-[70%] z-[1000]' : 'left-[-100%]'}
+        duration-500 h-screen  ${
+					open ? 'left-0 w-[70%] z-[1000]' : 'left-[-100%]'
+				}
         `}
-					ref={refOne}>
+					>
 						{/* Mobile */}
 						{links.map((link, i) => (
 							<div key={i}>
@@ -206,12 +228,14 @@ const Navbar = () => {
 									<div
 										onClick={() => {
 											heading !== link.name
-											? setHeading(link.name)
-											: setHeading('');
+												? setHeading(link.name)
+												: setHeading('');
 											setSubHeading('');
 										}}
 										// className='py-1 flex justify-between items-center group border-b'
-										className={`py-1 px-2 flex justify-between items-center group border-b w-full ${heading === link.name ? 'bg-gray-900 text-white' : ''}`}
+										className={`py-1 px-2 flex justify-between items-center group border-b w-full ${
+											heading === link.name ? 'bg-gray-900 text-white' : ''
+										}`}
 									>
 										<p>{link.name}</p>
 										<p className='md:hidden inline'>
@@ -237,14 +261,19 @@ const Navbar = () => {
 									{link.sublinks?.map((slinks, i) => (
 										<>
 											{/* top heading like Topwear */}
-											<div key={i}
+											<div
+												key={i}
 												onClick={() =>
 													subHeading !== slinks.Head
 														? setSubHeading(slinks.Head)
 														: setSubHeading('')
 												}
 												// className='py-1 px-2 flex justify-between items-center group border-b'
-												className={`py-1 px-2 flex justify-between items-center group border-b ${subHeading === slinks.Head ? 'bg-gray-900 text-white' : ''}`}
+												className={`py-1 px-2 flex justify-between items-center group border-b ${
+													subHeading === slinks.Head
+														? 'bg-gray-900 text-white'
+														: ''
+												}`}
 											>
 												<p>{slinks.Head}</p>
 
@@ -283,26 +312,33 @@ const Navbar = () => {
 					<Link href='/' className='md:hidden my-1'>
 						<Image src={logo} height={70} />
 					</Link>
+					
+
+					<div ref={searchRef}>
 					<div
 						className='md:hidden cursor-pointer group mx-3 my-2 rounded-sm'
 						onClick={() => setSearch(!search)}
 					>
-						<ion-icon name='search'></ion-icon>
+						<ion-icon name={search? 'close' : 'search'}></ion-icon>
+					</div>
 
-						<form className={`top-14 bg-white w-full left-0 p-4 duration-500 ${search? 'absolute' : 'hidden'}`} ref={refTwo}>
-								<input
-									type='text'
-									className='w-full py-2 px-3 my-2 bg-gray-100'
-									placeholder='Search'
-								/>
-								<button
-									type='submit'
-									className='text-white bg-black text-center w-full py-3'
-								>
-									Search
-								</button>
-							</form>
-
+					<form
+						className={`top-20 bg-white w-full left-0 p-4 duration-500 ${
+							search ? 'fixed' : 'hidden'
+						}`}
+					>
+						<input
+							type='text'
+							className='w-full py-2 px-3 my-2 bg-gray-100'
+							placeholder='Search'
+						/>
+						<button
+							type='submit'
+							className='text-white bg-black text-center w-full py-3'
+						>
+							Search
+						</button>
+					</form>
 					</div>
 				</div>
 			</div>

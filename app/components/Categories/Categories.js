@@ -28,44 +28,43 @@ const Categories = () => {
 				Trending Categories
 			</h2>
 
-			<div className='mx-2'>
+			<div className='mx-2 z-0'>
+				<Swiper
+					spaceBetween={10}
+					className='group'
+					navigation={{
+						nextEl: '.button-next-slide',
+						prevEl: '.button-prev-slide',
+					}}
+					modules={[Navigation]}
+					breakpoints={{
+						640: {
+							slidesPerView: 1,
+						},
+						768: {
+							slidesPerView: 2,
+						},
+						1024: {
+							slidesPerView: 4,
+						},
+						1440: {
+							slidesPerView: 5,
+						},
+					}}
+				>
+					{images?.map((img, i) => (
+						<SwiperSlide key={i}>
+							<Image src={img} className='w-full' alt='category' />
+						</SwiperSlide>
+					))}
 
-			<Swiper
-				spaceBetween={10}
-				className='group'
-				navigation={{
-					nextEl: '.button-next-slide',
-					prevEl: '.button-prev-slide',
-				}}
-				modules={[Navigation]}
-				breakpoints={{
-					640: {
-						slidesPerView: 1,
-					},
-					768: {
-						slidesPerView: 2,
-					},
-					1024: {
-						slidesPerView: 4,
-					},
-					1440: {
-						slidesPerView: 5,
-					},
-				}}
-			>
-				{images?.map((img, i) => (
-					<SwiperSlide key={i}>
-						<Image src={img} className='w-full' alt='category' />
-					</SwiperSlide>
-				))}
-
-				<div className='button-prev-slide w-[40px] h-[40px] bg-slate-50 text-black grid place-items-center absolute top-[47%] z-10 left-0'>
-					<ion-icon name='arrow-back-outline'></ion-icon>
-				</div>
-				<div className='button-next-slide w-[40px] h-[40px] bg-slate-50 text-black grid place-items-center absolute top-[47%] z-10 right-0'>
-					<ion-icon name='arrow-forward-outline'></ion-icon>
-				</div>
-			</Swiper>
+					<div className='button-prev-slide w-[40px] h-[40px] bg-slate-50 text-black grid place-items-center absolute top-[47%] z-10 left-0'>
+						<ion-icon name='arrow-back-outline'></ion-icon>
+					</div>
+					<div className='button-next-slide w-[40px] h-[40px] bg-slate-50 text-black grid place-items-center absolute top-[47%] z-10 right-0'>
+						<ion-icon name='arrow-forward-outline'></ion-icon>
+					</div>
+				</Swiper>
 			</div>
 		</>
 	);
