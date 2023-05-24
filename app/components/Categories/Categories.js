@@ -28,13 +28,15 @@ const Categories = () => {
 				Trending Categories
 			</h2>
 
+			<div className='mx-2'>
+
 			<Swiper
 				spaceBetween={10}
+				className='group'
 				navigation={{
 					nextEl: '.button-next-slide',
 					prevEl: '.button-prev-slide',
 				}}
-				className='group'
 				modules={[Navigation]}
 				breakpoints={{
 					640: {
@@ -64,6 +66,7 @@ const Categories = () => {
 					<ion-icon name='arrow-forward-outline'></ion-icon>
 				</div>
 			</Swiper>
+			</div>
 		</>
 	);
 };

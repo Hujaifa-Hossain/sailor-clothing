@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { links } from './links';
 import logo from '../assets/logo.png';
 
@@ -10,6 +10,23 @@ const Navbar = () => {
 	const [search, setSearch] = useState(false);
 	const [heading, setHeading] = useState('');
 	const [subHeading, setSubHeading] = useState('');
+	const refOne = useRef(null);
+	const refTwo = useRef(null);
+
+	useEffect(()=> {
+		document.addEventListener('click', handleClickOutSide, true)
+	}, []);
+
+	const handleClickOutSide = (e) => {
+		if(!refOne.current.contains(e.target) || !refTwo.current.contains(e.target)) {
+			setOpen(false);
+			setSearch(false)
+		} else {
+			setOpen(true)
+			setSearch(true)
+		}
+	}
+
 	return (
 		<nav>
 			{/* HEADER TOP  */}
@@ -180,7 +197,7 @@ const Navbar = () => {
         md:hidden bg-white fixed top-0 overflow-y-auto p-2
         duration-500 h-screen ${open ? 'left-0 w-[70%]' : 'left-[-100%]'}
         `}
-					>
+					ref={refOne}>
 						{/* Mobile */}
 						{links.map((link) => (
 							<div>
@@ -273,7 +290,7 @@ const Navbar = () => {
 						<ion-icon name='search'></ion-icon>
 
 						{search && (
-							<form className='top-14 bg-white w-full left-0 p-4'>
+							<form className='top-14 bg-white w-full left-0 p-4 absolute md:hidden duration-500' ref={refTwo}>
 								<input
 									type='text'
 									className='w-full py-2 px-3 my-2 bg-gray-100'

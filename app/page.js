@@ -7,8 +7,8 @@ export default function Home() {
 	return (
 		<main className='min-h-screen'>
 			<Hero />
-			<Categories />
-      <Arrivals/>
+			<Categories className='z-0'/>
+      <Arrivals className='z-0'/>
 			<Collection />
 		</main>
 	);
