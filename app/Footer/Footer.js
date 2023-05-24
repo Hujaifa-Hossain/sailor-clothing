@@ -130,7 +130,7 @@ const Footer = () => {
 				</p>
 			</div>
 
-			<div className='fixed bottom-0 md:hidden flex justify-around bg-white w-full text-black z-[1000]'>
+			<div className='fixed bottom-0 md:hidden flex justify-around py-1 bg-white w-full text-black z-[500]'>
 				<Link href='/' className='m-2'>
 					<ion-icon name='home-sharp'></ion-icon>
 				</Link>

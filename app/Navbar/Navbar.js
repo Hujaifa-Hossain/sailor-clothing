@@ -192,10 +192,10 @@ const Navbar = () => {
 						))}
 					</ul>
 
-					<ul
+					<div
 						className={`
         md:hidden bg-white fixed top-0 overflow-y-auto p-2
-        duration-500 h-screen ${open ? 'left-0 w-[70%]' : 'left-[-100%]'}
+        duration-500 h-screen  ${open ? 'left-0 w-[70%] z-[1000]' : 'left-[-100%]'}
         `}
 					ref={refOne}>
 						{/* Mobile */}
@@ -278,19 +278,18 @@ const Navbar = () => {
 								</div>
 							</div>
 						))}
-					</ul>
+					</div>
 
 					<Link href='/' className='md:hidden my-1'>
 						<Image src={logo} height={70} />
 					</Link>
 					<div
-						className='md:hidden cursor-pointer group px-3 py-2 rounded-sm'
+						className='md:hidden cursor-pointer group mx-3 my-2 rounded-sm'
 						onClick={() => setSearch(!search)}
 					>
 						<ion-icon name='search'></ion-icon>
 
-						{search && (
-							<form className='top-14 bg-white w-full left-0 p-4 absolute md:hidden duration-500' ref={refTwo}>
+						<form className={`top-14 bg-white w-full left-0 p-4 duration-500 ${search? 'absolute' : 'hidden'}`} ref={refTwo}>
 								<input
 									type='text'
 									className='w-full py-2 px-3 my-2 bg-gray-100'
@@ -303,7 +302,10 @@ const Navbar = () => {
 									Search
 								</button>
 							</form>
-						)}
+
+						{/* {search && (
+							
+						)} */}
 					</div>
 				</div>
 			</div>
