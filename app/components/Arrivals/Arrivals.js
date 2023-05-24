@@ -10,8 +10,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 const Arrivals = () => {
 	const [index, setIndex] = useState(0);
 
-	console.log(arrive);
-
 	return (
 		<div>
 			<h2 className='font-bold text-xl text-center my-4'>New Arrivals</h2>
@@ -78,6 +76,7 @@ const Arrivals = () => {
 			{/* TABS BODY */}
 
       {/* MEN */}
+			<div className='mx-2'>
 			<div hidden={index !== 0}>
 				{arrive?.map((arr, i) =>
 					arr?.name === 'men' ? (
@@ -329,6 +328,7 @@ const Arrivals = () => {
 						<div />
 					)
 				)}
+			</div>
 			</div>
 		</div>
 	);

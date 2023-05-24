@@ -10,6 +10,7 @@ const Navbar = () => {
 	const [search, setSearch] = useState(false);
 	const [heading, setHeading] = useState('');
 	const [subHeading, setSubHeading] = useState('');
+	
 	const refOne = useRef(null);
 	const refTwo = useRef(null);
 
@@ -23,7 +24,6 @@ const Navbar = () => {
 			setSearch(false)
 		} else {
 			setOpen(true)
-			setSearch(true)
 		}
 	}
 
@@ -113,8 +113,8 @@ const Navbar = () => {
 					<ul className='md:flex hidden uppercase items-center gap-8'>
 						{/* desktop */}
 
-						{links.map((link) => (
-							<div>
+						{links.map((link, i) => (
+							<div key={i}>
 								<div className='px-3 md:cursor-pointer group'>
 									<h2
 										className='py-4 flex justify-between items-center text-xs group'
@@ -131,13 +131,13 @@ const Navbar = () => {
 										<div>
 											<div className='absolute top-30 w-full left-0 hidden group-hover:md:block hover:md:block'>
 												<div className='bg-white p-5 grid grid-cols-3 gap-10'>
-													{link.sublinks?.map((mysublinks) => (
-														<div>
+													{link.sublinks?.map((mysublinks, i) => (
+														<div key={i}>
 															<h1 className='text-lg font-semibold'>
 																{mysublinks.Head}
 															</h1>
-															{mysublinks.sublink.map((slink) => (
-																<li className='text-sm text-gray-600 my-2.5'>
+															{mysublinks.sublink.map((slink, i) => (
+																<li className='text-sm text-gray-600 my-2.5' key={i}>
 																	<Link
 																		href={slink.link}
 																		className='hover:text-primary'
@@ -160,8 +160,8 @@ const Navbar = () => {
 						`}
 								>
 									{/* sublinks */}
-									{link.sublinks?.map((slinks) => (
-										<div>
+									{link.sublinks?.map((slinks, i) => (
+										<div key={i}>
 											<div>
 												<h1
 													onClick={() =>
@@ -178,8 +178,8 @@ const Navbar = () => {
 														subHeading === slinks.Head ? 'md:hidden' : 'hidden'
 													}`}
 												>
-													{slinks.sublink.map((slink) => (
-														<li className='py-3 pl-14'>
+													{slinks.sublink.map((slink, i) => (
+														<li className='py-3 pl-14' key={i}>
 															<Link href={slink.link}>{slink.name}</Link>
 														</li>
 													))}
@@ -199,8 +199,8 @@ const Navbar = () => {
         `}
 					ref={refOne}>
 						{/* Mobile */}
-						{links.map((link) => (
-							<div>
+						{links.map((link, i) => (
+							<div key={i}>
 								<div className='group my-[2px]'>
 									{/* Category tom heading like men, women */}
 									<div
@@ -234,10 +234,10 @@ const Navbar = () => {
           					`}
 								>
 									{/* sublinks */}
-									{link.sublinks?.map((slinks) => (
+									{link.sublinks?.map((slinks, i) => (
 										<>
 											{/* top heading like Topwear */}
-											<div
+											<div key={i}
 												onClick={() =>
 													subHeading !== slinks.Head
 														? setSubHeading(slinks.Head)
@@ -265,8 +265,8 @@ const Navbar = () => {
 													subHeading === slinks.Head ? 'md:hidden' : 'hidden'
 												}`}
 											>
-												{slinks.sublink.map((slink) => (
-													<div>
+												{slinks.sublink.map((slink, i) => (
+													<div key={i}>
 														<Link className='py-1 pl-3' href={slink.link}>
 															{slink.name}
 														</Link>
@@ -303,9 +303,6 @@ const Navbar = () => {
 								</button>
 							</form>
 
-						{/* {search && (
-							
-						)} */}
 					</div>
 				</div>
 			</div>
