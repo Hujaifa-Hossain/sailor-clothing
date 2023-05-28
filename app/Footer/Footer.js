@@ -113,7 +113,10 @@ const Footer = () => {
 							className='outline-none bg-gray-50 p-2 my-1 w-full text-black'
 						/>
 						<div>
-							<button className='rounded p-2 font-bold border max-w-full' type='submit'>
+							<button
+								className='rounded p-2 font-bold border max-w-full'
+								type='submit'
+							>
 								Subscribe
 							</button>
 						</div>
@@ -130,7 +133,7 @@ const Footer = () => {
 				</p>
 			</div>
 
-			<div className='fixed bottom-0 md:hidden flex justify-around py-1 bg-white w-full text-black z-[500]'>
+			<div className='fixed bottom-0 md:hidden flex justify-around py-1 bg-white w-full text-black z-10'>
 				<Link href='/' className='m-2'>
 					<ion-icon name='home-sharp'></ion-icon>
 				</Link>

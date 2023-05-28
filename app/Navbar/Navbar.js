@@ -18,10 +18,10 @@ const Navbar = () => {
 		let handleClickOutSide = (e) => {
 			if (!menuRef.current.contains(e.target)) {
 				setOpen(false);
-			} 
+			}
 			if (!searchRef.current.contains(e.target)) {
 				setSearch(false);
-			} 
+			}
 		};
 		document.addEventListener('mousedown', handleClickOutSide);
 
@@ -64,8 +64,8 @@ const Navbar = () => {
 			</div>
 
 			<div className='sticky top-0 bg-white'>
-				{/* HEADER CONFIG */}
 
+				{/* HEADER CONFIG */}
 				<div className='container m-auto px-4 xl:flex justify-between items-center py-1 hidden border-b border-gray-100'>
 					<Link href='/'>
 						<Image src={logo} height={70} alt='logo' />
@@ -104,141 +104,7 @@ const Navbar = () => {
 					</Link>
 				</div>
 
-				{/* MEGA MENU */}
-				<div className='container m-auto flex items-center font-medium justify-between'>
-					<div
-						className='px-4 mt-1 md:hidden cursor-pointer group '
-						ref={menuRef}
-					>
-						<ion-icon name='menu' onClick={() => setOpen(!open)}></ion-icon>
-
-						{/* Mobile offcanvas started */}
-						<div
-							className={`
-							md:hidden bg-white fixed top-0 overflow-y-auto p-2
-							duration-500 h-[100vh] z-[10001] ${open ? 'left-0 w-[70%]' : 'left-[-100%]'}
-        			`}
-						>
-							{/* Mobile */}
-							{links.map((link, i) => (
-								<div key={i}>
-									<div className='group my-[2px]'>
-										{/* Category tom heading like men, women */}
-										<div
-											onClick={() => {
-												heading !== link.name
-													? setHeading(link.name)
-													: setHeading('');
-												setSubHeading('');
-											}}
-											// className='py-1 flex justify-between items-center group border-b'
-											className={`py-1 px-2 flex justify-between items-center group border-b w-full ${
-												heading === link.name ? 'bg-gray-900 text-white' : ''
-											}`}
-										>
-											<p>{link.name}</p>
-											<p className='md:hidden inline'>
-												<ion-icon
-													name={`${
-														heading === link.name
-															? 'remove-outline'
-															: 'add-outline'
-													}`}
-												></ion-icon>
-											</p>
-										</div>
-										{/* Category top heading like men, women */}
-									</div>
-
-									{/* Mobile menus */}
-									<div
-										className={`
-            				${heading === link.name ? 'md:hidden' : 'hidden'}
-          					`}
-									>
-										{/* sublinks */}
-										{link.sublinks?.map((slinks, i) => (
-											<>
-												{/* top heading like Topwear */}
-												<div
-													key={i}
-													onClick={() =>
-														subHeading !== slinks.Head
-															? setSubHeading(slinks.Head)
-															: setSubHeading('')
-													}
-													className={`py-1 px-2 flex justify-between items-center group border-b ${
-														subHeading === slinks.Head
-															? 'bg-gray-900 text-white'
-															: ''
-													}`}
-												>
-													<p>{slinks.Head}</p>
-
-													<p className='md:hidden inline'>
-														<ion-icon
-															name={`${
-																subHeading === slinks.Head
-																	? 'remove-outline'
-																	: 'add-outline'
-															}`}
-														></ion-icon>
-													</p>
-												</div>
-												{/* top heading like Topwear */}
-
-												<div
-													className={`${
-														subHeading === slinks.Head ? 'md:hidden' : 'hidden'
-													}`}
-												>
-													{slinks.sublink.map((slink, i) => (
-														<div key={i}>
-															<Link className='py-1 pl-3' href={slink.link}>
-																{slink.name}
-															</Link>
-														</div>
-													))}
-												</div>
-											</>
-										))}
-									</div>
-								</div>
-							))}
-						</div>
-
-						{/* Mobile offcanvas ended */}
-					</div>
-
-					<Link href='/' className='md:hidden my-1'>
-						<Image src={logo} height={60} />
-					</Link>
-
-					<div className='md:hidden cursor-pointer group mx-3 my-2 rounded-sm' ref={searchRef}>
-							<ion-icon
-								name={search ? 'close' : 'search'}
-								onClick={() => setSearch(!search)}
-							></ion-icon>
-							<form
-								className={`top-14 bg-white w-full left-0 p-4 duration-500 ${
-									search ? 'fixed' : 'hidden'
-								}`}
-							>
-								<input
-									type='text'
-									className='w-full py-2 px-3 my-2 bg-gray-100'
-									placeholder='Search'
-								/>
-								<button
-									type='submit'
-									className='text-white bg-black text-center w-full py-3'
-								>
-									Search
-								</button>
-							</form>
-						</div>
-				</div>
-
+				{/* MEGA MENU FOR DESKTOP */}
 				<div className='container m-auto hidden md:flex uppercase items-center gap-8'>
 					{/* desktop */}
 
@@ -315,6 +181,140 @@ const Navbar = () => {
 							</div>
 						</div>
 					))}
+				</div>
+			</div>
+
+			<div className='container m-auto md:hidden flex items-center font-medium justify-between bg-white'>
+				<div className='px-4 mt-1 cursor-pointer relative ' ref={menuRef}>
+					<ion-icon name='menu' onClick={() => setOpen(!open)}></ion-icon>
+
+					{/* Mobile offcanvas started */}
+					<div
+						className={`
+							md:hidden bg-white fixed top-0 overflow-y-auto p-2
+							duration-500 h-[100vh] z-50 ${open ? 'left-0 w-[70%]' : 'left-[-100%]'}
+        			`}
+					>
+						{/* Mobile */}
+						{links.map((link, i) => (
+							<div key={i}>
+								<div className='group my-[2px]'>
+									{/* Category tom heading like men, women */}
+									<div
+										onClick={() => {
+											heading !== link.name
+												? setHeading(link.name)
+												: setHeading('');
+											setSubHeading('');
+										}}
+										// className='py-1 flex justify-between items-center group border-b'
+										className={`py-1 px-2 flex justify-between items-center group border-b w-full ${
+											heading === link.name ? 'bg-gray-900 text-white' : ''
+										}`}
+									>
+										<p>{link.name}</p>
+										<p className='md:hidden inline'>
+											<ion-icon
+												name={`${
+													heading === link.name
+														? 'remove-outline'
+														: 'add-outline'
+												}`}
+											></ion-icon>
+										</p>
+									</div>
+									{/* Category top heading like men, women */}
+								</div>
+
+								{/* Mobile menus */}
+								<div
+									className={`
+            				${heading === link.name ? 'md:hidden' : 'hidden'}
+          					`}
+								>
+									{/* sublinks */}
+									{link.sublinks?.map((slinks, i) => (
+										<>
+											{/* top heading like Topwear */}
+											<div
+												key={i}
+												onClick={() =>
+													subHeading !== slinks.Head
+														? setSubHeading(slinks.Head)
+														: setSubHeading('')
+												}
+												className={`py-1 px-2 flex justify-between items-center group border-b ${
+													subHeading === slinks.Head
+														? 'bg-gray-900 text-white'
+														: ''
+												}`}
+											>
+												<p>{slinks.Head}</p>
+
+												<p className='md:hidden inline'>
+													<ion-icon
+														name={`${
+															subHeading === slinks.Head
+																? 'remove-outline'
+																: 'add-outline'
+														}`}
+													></ion-icon>
+												</p>
+											</div>
+											{/* top heading like Topwear */}
+
+											<div
+												className={`${
+													subHeading === slinks.Head ? 'md:hidden' : 'hidden'
+												}`}
+											>
+												{slinks.sublink.map((slink, i) => (
+													<div key={i}>
+														<Link className='py-1 pl-2 text-base font-normal' href={slink.link}>
+															{slink.name}
+														</Link>
+													</div>
+												))}
+											</div>
+										</>
+									))}
+								</div>
+							</div>
+						))}
+					</div>
+
+					{/* Mobile offcanvas ended */}
+				</div>
+
+				<Link href='/' className='my-1'>
+					<Image src={logo} height={60} />
+				</Link>
+
+				<div
+					className='cursor-pointer relative mx-3 my-2 rounded-sm'
+					ref={searchRef}
+				>
+					<ion-icon
+						name={search ? 'close' : 'search'}
+						onClick={() => setSearch(!search)}
+					></ion-icon>
+					<form
+						className={`top-16 bg-white w-full left-0 p-4 duration-500 ${
+							search ? 'fixed' : 'hidden'
+						}`}
+					>
+						<input
+							type='text'
+							className='w-full py-2 px-3 my-2 bg-gray-100'
+							placeholder='Search'
+						/>
+						<button
+							type='submit'
+							className='text-white bg-black text-center w-full py-3'
+						>
+							Search
+						</button>
+					</form>
 				</div>
 			</div>
 		</nav>
