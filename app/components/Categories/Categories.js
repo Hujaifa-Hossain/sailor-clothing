@@ -11,16 +11,34 @@ import category2 from '../../assets/category2.webp';
 import category3 from '../../assets/category3.webp';
 import category4 from '../../assets/category4.webp';
 import category5 from '../../assets/category5.webp';
+import Link from 'next/link';
 
 const Categories = () => {
-	const images = [
-		category1,
-		category2,
-		category3,
-		category4,
-		category5,
-		category1,
-		category2,
+	const categories = [
+		{
+			category: 'Men',
+			img: category1,
+		},
+		{
+			category: 'Women',
+			img: category2,
+		},
+		{
+			category: 'Kids',
+			img: category3,
+		},
+		{
+			category: 'New Born',
+			img: category4,
+		},
+		{
+			category: 'Footwear',
+			img: category5,
+		},
+		{
+			category: 'Accessories',
+			img: category3,
+		},
 	];
 	return (
 		<>
@@ -28,10 +46,10 @@ const Categories = () => {
 				Trending Categories
 			</h2>
 
-			<div className='mx-2 z-0'>
+			<div className='mx-2 z-[0]'>
 				<Swiper
 					spaceBetween={10}
-					className='group'
+					className='group z-[0]'
 					navigation={{
 						nextEl: '.button-next-slide',
 						prevEl: '.button-prev-slide',
@@ -52,10 +70,20 @@ const Categories = () => {
 						},
 					}}
 				>
-					{images?.map((img, i) => (
-						<SwiperSlide key={i}>
-							<Image src={img} className='w-full' alt='category' />
+					{categories?.map((cat, i) => (
+						<div className='z-[0]'>
+							<SwiperSlide key={i}>
+							<div className='relative z-[0]'>
+								<Image src={cat?.img} className='w-full z-[0]' alt='category' />
+								<Link
+									href='/'
+									className='bg-white text-black text-center absolute bottom-2 z-50 font-medium py-[5px] text-[14px] w-[80%] m-auto left-2 right-2'
+								>
+									{cat?.category}
+								</Link>
+							</div>
 						</SwiperSlide>
+						</div>
 					))}
 
 					<div className='button-prev-slide w-[40px] h-[40px] bg-slate-50 text-black grid place-items-center absolute top-[47%] z-10 left-0'>
