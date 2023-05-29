@@ -64,7 +64,6 @@ const Navbar = () => {
 			</div>
 
 			<div className='sticky top-0 bg-white'>
-
 				{/* HEADER CONFIG */}
 				<div className='container m-auto px-4 xl:flex justify-between items-center py-1 hidden border-b border-gray-100'>
 					<Link href='/'>
@@ -185,102 +184,110 @@ const Navbar = () => {
 			</div>
 
 			<div className='container m-auto md:hidden flex items-center font-medium justify-between bg-white'>
-				<div className='px-4 mt-1 cursor-pointer relative ' ref={menuRef}>
+				<div className='px-4 mt-1 cursor-pointer relative '>
 					<ion-icon name='menu' onClick={() => setOpen(!open)}></ion-icon>
 
 					{/* Mobile offcanvas started */}
 					<div
 						className={`
-							md:hidden bg-white fixed top-0 overflow-y-auto p-2
-							duration-500 h-[100vh] z-50 ${open ? 'left-0 w-[70%]' : 'left-[-100%]'}
+							md:hidden bg-[#00000050] fixed top-0 
+							duration-500 h-[100vh] z-50 ${open ? 'left-0 w-[100%]' : 'left-[-100%]'}
         			`}
 					>
-						{/* Mobile */}
-						{links.map((link, i) => (
-							<div key={i}>
-								<div className='group my-[2px]'>
-									{/* Category tom heading like men, women */}
-									<div
-										onClick={() => {
-											heading !== link.name
-												? setHeading(link.name)
-												: setHeading('');
-											setSubHeading('');
-										}}
-										// className='py-1 flex justify-between items-center group border-b'
-										className={`py-1 px-2 flex justify-between items-center group border-b w-full ${
-											heading === link.name ? 'bg-gray-900 text-white' : ''
-										}`}
-									>
-										<p>{link.name}</p>
-										<p className='md:hidden inline'>
-											<ion-icon
-												name={`${
-													heading === link.name
-														? 'remove-outline'
-														: 'add-outline'
-												}`}
-											></ion-icon>
-										</p>
+						<div
+							ref={menuRef}
+							className='bg-white p-2 h-[100vh] opacity-100 w-[70%] overflow-y-auto'
+						>
+							{/* Mobile */}
+							{links.map((link, i) => (
+								<div key={i}>
+									<div className='group my-[2px]'>
+										{/* Category tom heading like men, women */}
+										<div
+											onClick={() => {
+												heading !== link.name
+													? setHeading(link.name)
+													: setHeading('');
+												setSubHeading('');
+											}}
+											// className='py-1 flex justify-between items-center group border-b'
+											className={`py-1 px-2 flex justify-between items-center group border-b w-full ${
+												heading === link.name ? 'bg-gray-900 text-white' : ''
+											}`}
+										>
+											<p>{link.name}</p>
+											<p className='md:hidden inline'>
+												<ion-icon
+													name={`${
+														heading === link.name
+															? 'remove-outline'
+															: 'add-outline'
+													}`}
+												></ion-icon>
+											</p>
+										</div>
+										{/* Category top heading like men, women */}
 									</div>
-									{/* Category top heading like men, women */}
-								</div>
 
-								{/* Mobile menus */}
-								<div
-									className={`
+									{/* Mobile menus */}
+									<div
+										className={`
             				${heading === link.name ? 'md:hidden' : 'hidden'}
           					`}
-								>
-									{/* sublinks */}
-									{link.sublinks?.map((slinks, i) => (
-										<>
-											{/* top heading like Topwear */}
-											<div
-												key={i}
-												onClick={() =>
-													subHeading !== slinks.Head
-														? setSubHeading(slinks.Head)
-														: setSubHeading('')
-												}
-												className={`py-1 px-2 flex justify-between items-center group border-b ${
-													subHeading === slinks.Head
-														? 'bg-gray-900 text-white'
-														: ''
-												}`}
-											>
-												<p>{slinks.Head}</p>
+									>
+										{/* sublinks */}
+										{link.sublinks?.map((slinks, i) => (
+											<>
+												{/* top heading like Topwear */}
+												<div
+													key={i}
+													onClick={() =>
+														subHeading !== slinks.Head
+															? setSubHeading(slinks.Head)
+															: setSubHeading('')
+													}
+													className={`py-1 px-2 flex justify-between items-center group border-b ${
+														subHeading === slinks.Head
+															? 'bg-gray-900 text-white'
+															: ''
+													}`}
+												>
+													<p>{slinks.Head}</p>
 
-												<p className='md:hidden inline'>
-													<ion-icon
-														name={`${
-															subHeading === slinks.Head
-																? 'remove-outline'
-																: 'add-outline'
-														}`}
-													></ion-icon>
-												</p>
-											</div>
-											{/* top heading like Topwear */}
+													<p className='md:hidden inline'>
+														<ion-icon
+															name={`${
+																subHeading === slinks.Head
+																	? 'remove-outline'
+																	: 'add-outline'
+															}`}
+														></ion-icon>
+													</p>
+												</div>
+												{/* top heading like Topwear */}
 
-											<div
-												className={`${
-													subHeading === slinks.Head ? 'md:hidden' : 'hidden'
-												}`}
-											>
-												{slinks.sublink.map((slink, i) => (
-													<div key={i}>
-														<Link className='py-1 pl-2 text-base font-normal' href={slink.link}>
-															{slink.name}
-														</Link>
-													</div>
-												))}
-											</div>
-										</>
-									))}
+												<div
+													className={`${
+														subHeading === slinks.Head ? 'md:hidden' : 'hidden'
+													}`}
+												>
+													{slinks.sublink.map((slink, i) => (
+														<div key={i}>
+															<Link
+																className='py-1 pl-2 text-base font-normal'
+																href={slink.link}
+															>
+																{slink.name}
+															</Link>
+														</div>
+													))}
+												</div>
+											</>
+										))}
+									</div>
 								</div>
-							</div>
-						))}
+							))}
+						</div>
 					</div>
 
 					{/* Mobile offcanvas ended */}
